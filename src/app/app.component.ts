@@ -35,8 +35,8 @@ export class AppComponent implements OnInit {
     // this.destroyRef.onDestroy(() => {
     //   subscription.unsubscribe();
     // });
-    this.clickCount$.subscribe((value) => {
-        console.log('Click button: ' + value + ' times.')
+    this.clickCount$.subscribe({
+      next: (value) => console.log('Click button: ' + value + ' times.')
     })
   }
 
