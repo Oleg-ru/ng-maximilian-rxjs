@@ -18,9 +18,16 @@ export class AppComponent implements OnInit {
   intervalSignal = toSignal(this.interval$, {initialValue: 0});
 
   customInterval$ = new Observable((subscriber) => {
-    setInterval(() => {
-      console.log('Emitting new value...')
-      subscriber.next({message: 'New value', value: 0})
+    let timesExecuted = 0;
+    const interval = setInterval(() => {
+      if (timesExecuted > 2) {
+        clearInterval(interval);
+        subscriber.complete();
+        return;
+      }
+      console.log('Emitting new value...');
+      subscriber.next({message: 'New value', value: 0});
+      timesExecuted++;
     }, 2000)
   });
 
@@ -55,6 +62,7 @@ export class AppComponent implements OnInit {
     this.customInterval$.subscribe({
       // @ts-ignore
       next: (val) => console.log({...val, he: 'he-he'}),
+      complete: () => console.log('COMPLETED')
     })
 
     this.destroyRef.onDestroy(() => {
