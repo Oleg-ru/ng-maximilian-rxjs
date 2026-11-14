@@ -7,8 +7,8 @@ import {interval, map} from "rxjs";
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  interval = signal(0);
-  doubleInterval = computed(() => this.interval() * 2)
+  // interval = signal(0);
+  // doubleInterval = computed(() => this.interval() * 2)
 
   clickCount = signal(0);
   private destroyRef = inject(DestroyRef);
@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    setInterval(() => {
-      this.interval.update(prev => prev + 1);
-    }, 1000)
+    // setInterval(() => {
+    //   this.interval.update(prev => prev + 1);
+    // }, 1000)
 
     // const subscription = interval(1000).pipe(
     //     map(x => x * 2)
