@@ -1,5 +1,6 @@
 import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
-import {toObservable} from "@angular/core/rxjs-interop";
+import {toObservable, toSignal} from "@angular/core/rxjs-interop";
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,9 @@ export class AppComponent implements OnInit {
 
   clickCount = signal(0);
   clickCount$ = toObservable(this.clickCount);
+  interval$ = interval(1000);
+  intervalSignal = toSignal(this.interval$)
+
   private destroyRef = inject(DestroyRef);
 
   constructor() {
